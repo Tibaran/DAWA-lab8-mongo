@@ -40,8 +40,8 @@ class Server {
         this.app.use('/users', require('../routes/usersRoute'));
     }
     listen() {
-        this.server.listen( 3000, () => {
-            console.log('Servidor corriendo en puerto', 3000 );
+        this.server.listen( process.env.PORT || 3000, () => {
+            console.log('Servidor corriendo en puerto', process.env.PORT || 3000 );
         });
     }
 }
