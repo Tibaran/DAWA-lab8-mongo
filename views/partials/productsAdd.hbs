@@ -1,0 +1,66 @@
+
+<form method="post">
+    {{#with product}}
+    <div class="form-group">
+        <label for="inputId">Id</label>
+        <input type="text" class="form-control" name="txtId" id="inputId" value="{{_id}}" placeholder="0" readonly>
+    </div>
+    <div class="form-group">
+        <label for="inputNombre">Nombre</label>
+        <input type="text" class="form-control" name="txtNombre" id="inputNombre" value="{{nombre}}">
+    </div>
+    <div class="form-check">
+      <label class="form-check-label">
+        {{#if estado}}  
+        <input type="checkbox" class="form-check-input" name="txtEstado" id="estado" checked>
+        {{else}}
+        <input type="checkbox" class="form-check-input" name="txtEstado" id="estado">
+        {{/if}}
+        Disponible
+      </label>
+    </div>
+    <div class="form-group">
+        <label for="inputPrice">Precio</label>
+        <input type="number" class="form-control" id="inputPrice" name="txtPrecio" value="{{precio}}" step="0.01">
+    </div>
+    <div class="form-group">
+        <label for="inputDesc">Descripcion</label>
+        <input type="text" class="form-control" name="txtDesc" id="inputDesc" value="{{descripcion}}">
+    </div>
+    <div class="form-group">
+        <label for="inputDisponible">Disponible</label>
+        <input type="number" class="form-control" id="inputDisponible" name="txtDisponible" value="{{disponible}}" step="1">
+    </div>
+    <div class="form-group">
+        <label for="inputImg">Imagen</label>
+        <input type="text" class="form-control" name="txtImg" id="inputImg" value="{{img}}">
+    </div>
+    
+    {{/with}}
+    <div class="form-group">
+        <label for="selectUser">Usuarios</label>
+        <select class="form-control" id="selectUser" name="txtUser">
+            {{#if user}}
+            {{#each user}}
+                <option value={{_id}}>{{nombre}}</option>
+            {{/each}}
+            {{else}}
+                <option>No hay Usuarios</option>
+            {{/if}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="selectCategory">Categorias</label>
+        <select class="form-control" id="selectCategory" name="txtCategoria">
+            {{#if category}}
+            {{#each category}}
+                <option value={{_id}}>{{nombre}}</option>
+            {{/each}}
+            {{else}}
+                <option>No hay Categorias</option>
+            {{/if}}
+        </select>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Agregar</button>
+</form>

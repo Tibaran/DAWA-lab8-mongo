@@ -7,19 +7,45 @@ router.use(function timeLog (req, res, next) {
     //console.log('Time: ', Date.now());
     next();
   });
+// Listar usuarios
 router.get('/', async(req, res)=>{
     const Users = await User.find();
     res.render('layout', {vista: 'users', user: Users});  
 });
-router.get('/add', async(req, res)=>{
+// Agregar Usuario
+router.route('/add')
+.get( async(req, res)=>{
     const Rols = await Rol.find();
-    res.render('layout', {vista: 'usersAdd', rol: Rols});
-});
-router.post('/add', async(req, res)=>{
-    const {txtNombre, txtCorreo, txtPass, txtImg, txtRol, txtEstado}= req.body;
     const id = await User.estimatedDocumentCount()+1;
-    const newUser = new User({_id: id, rol: txtRol, nombre: txtNombre, correo: txtCorreo, password: txtPass, img: txtImg, estado: txtEstado=='on'?true:false});
+    const usuario = new User({_id: id});
+    res.render('layout', {vista: 'usersAdd', rol: Rols, user: usuario});
+})
+.post( async(req, res)=>{
+    const {txtId, txtNombre, txtCorreo, txtPass, txtImg, txtRol, txtEstado} = req.body;
+    const newUser = new User({_id: txtId, userol: txtRol, nombre: txtNombre, correo: txtCorreo, password: txtPass, img: txtImg, estado: txtEstado=='on'?true:false});
     await newUser.save();
+    res.redirect('/users');
+});
+
+// Editar Usuario
+router.route('/edit/:id')
+.get( async(req, res)=>{
+    const Rols = await Rol.find();
+    const {id} = req.params;
+    const usuario = await User.findById(id);
+    res.render('layout', {vista: 'usersAdd', rol: Rols, user: usuario});
+})
+.post( async(req, res)=>{
+    const {txtId, txtNombre, txtCorreo, txtPass, txtImg, txtRol, txtEstado} = req.body;
+    const updatedUser = new User({_id: txtId, userol: txtRol, nombre: txtNombre, correo: txtCorreo, password: txtPass, img: txtImg, estado: txtEstado=='on'?true:false});
+    await User.updateOne({_id: txtId}, updatedUser);
+    res.redirect('/users');
+});
+
+// Eliminar Usuario
+router.get('/delete/:id',async(req,res)=>{
+    const {id} = req.params;
+    await User.findByIdAndDelete(id);
     res.redirect('/users');
 });
 

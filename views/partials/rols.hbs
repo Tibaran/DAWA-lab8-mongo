@@ -12,6 +12,8 @@
             <tr>
                 <td scope="row">{{_id}}</td>
                 <td>{{rol}}</td>
+                <td><a type="button" class="btn btn-primary ml-3" href="/rols/edit/{{_id}}">Editar</a></td>
+                <td><a type="button" class="btn btn-danger" href="/rols/delete/{{_id}}">Eliminar</a></td>
             </tr>
             {{/each}}
         </tbody>

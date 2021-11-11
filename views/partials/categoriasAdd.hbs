@@ -1,6 +1,6 @@
 
 <form method="post">
-    {{#with user}}
+    {{#with category}}
     <div class="form-group">
         <label for="inputId">Id</label>
         <input type="text" class="form-control" name="txtId" id="inputId" value="{{_id}}" placeholder="0" readonly>
@@ -8,18 +8,6 @@
     <div class="form-group">
         <label for="inputNombre">Nombre</label>
         <input type="text" class="form-control" name="txtNombre" id="inputNombre" value="{{nombre}}">
-    </div>
-    <div class="form-group">
-        <label for="inputEmail">Correo</label>
-        <input type="email" class="form-control" id="inputEmail" name="txtCorreo" value="{{correo}}" placeholder="correo@ejemplo.com">
-    </div>
-    <div class="form-group">
-        <label for="inputPass">Contraseña</label>
-        <input type="text" class="form-control" name="txtPass" id="inputPass" value="{{password}}">
-    </div>
-    <div class="form-group">
-        <label for="inputImg">Imagen</label>
-        <input type="text" class="form-control" name="txtImg" id="inputImg" value="{{img}}">
     </div>
     <div class="form-check">
       <label class="form-check-label">
@@ -33,11 +21,15 @@
     </div>
     {{/with}}
     <div class="form-group">
-        <label for="selectRol">Rol</label>
-        <select class="form-control" id="selectRol" name="txtRol">
-            {{#each rol}}
-                <option value={{rol}}>{{rol}}</option>
+        <label for="selectUser">Usuarios</label>
+        <select class="form-control" id="selectUser" name="txtUser">
+            {{#if user}}
+            {{#each user}}
+                <option value={{_id}}>{{nombre}}</option>
             {{/each}}
+            {{else}}
+                <option>No hay Usuarios</option>
+            {{/if}}
         </select>
     </div>
     

@@ -20,7 +20,11 @@ class Server {
         this.routes();
     }
     async mongoConnection(){
-        await mongoose.connect('mongodb+srv://usuario:1234@clusterlab7.teydf.mongodb.net/dbLab7?retryWrites=true&w=majority');
+        await mongoose.connect('mongodb+srv://usuario:1234@clusterlab7.teydf.mongodb.net/dbLab7?retryWrites=true&w=majority').then(()=>{
+            console.log("Conexion Correcta");
+        }).catch((err)=>{
+            console.log(err);
+        });
     }
     middlewares(){
         this.app.use(cors());
@@ -38,6 +42,8 @@ class Server {
         });
         this.app.use('/rols', require('../routes/rolsRoute'));
         this.app.use('/users', require('../routes/usersRoute'));
+        this.app.use('/categories', require('../routes/categoriasRoute'));
+        this.app.use('/products', require('../routes/productsRoute'));
     }
     listen() {
         this.server.listen( process.env.PORT || 3000, () => {

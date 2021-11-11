@@ -17,13 +17,15 @@
             {{#each user}}
             <tr>
                 <td scope="row">{{_id}}</td>
-                <td>{{rol}}</td>
+                <td>{{userol}}</td>
                 <td>{{nombre}}</td>
                 <td>{{correo}}</td>
                 <td>{{password}}</td>
                 <td>{{img}}</td>
                 <td>{{estado}}</td>
                 <td>{{google}}</td>
+                <td><a type="button" class="btn btn-primary ml-3" href="/users/edit/{{_id}}">Editar</a></td>
+                <td><a type="button" class="btn btn-danger" href="/users/delete/{{_id}}">Eliminar</a></td>
             </tr>
             {{/each}}
         </tbody>
